@@ -1,0 +1,90 @@
+****************
+* HashTable
+* CS 321
+* 10/26/17
+* Spencer Adams
+**************** 
+
+OVERVIEW:
+
+ In this project I am inserting n keys into a hash table of size m.
+ Then the load factor α is defined to be α = n/m . For open addressing 
+ n ≤ m, which implies that 0 ≤ α ≤ 1. I use linear probing, 
+ double hashing, and I attempted quadratic probing. I designed the HashTable<T> class by passing in an 
+ indicator via constructor so that the appropriate kind of probing will
+ be performed.
+
+INCLUDED FILES:
+
+ List of files required for this project:
+
+ * HashObject.java - source file
+ * HashTable.java - source file
+ * HashTest.java - Driver class
+ * README - this file
+
+
+COMPILING AND RUNNING:
+
+ From the directory containing all source files, compile the
+ driver class (and all dependencies) with the command:
+ $ javac *.java
+
+ Run the compiled class file with the command:
+ $ java HashTest [load factor] [hash table capacity] [input file] [input type] [ | debug level]
+ 
+ HashTest can take in a potential 5 command line arguments but only 4 are required. 
+ All except debug level which will be defaulted to zero if no data is submitted.
+ 
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+ The HashTable class is an array of HashObjects that contain a generic object V. The 
+ program using linear probing as well as double hashing.Like I stated in the section above, 
+ this program takes in command line arguments. The first argument is the load
+  factor which can be define as α = n/m. Its this number thats used to 
+ calculate the hash tables maxSize. The second argument is the hash table capacity which 
+ when paired with the given load factor plays into the maxSize variable capacity = m. The capacity should be 
+ a prime with another prime number two less than the value (i.e 7,13,19). The third argument is the input file 
+ which is the file that the user wants to test with. If the file cannot be found the program will stop and inform the user.
+ The last mandatory argument is input type which dictates what type of object will be used. The values
+ that can be used are 0-3 0 being Integers 1 being Longs 2 being Strings 3 being Characters. The last argument
+ is optional and it represents the debug level or the amount of information a user wishes to get back.
+ If no value is supplied the program assumes 0 and gives the user the lowest amount of data. If the
+ input is 1 the user results will include a schematic of the hash table with the location of each non
+ null value and the value inside of that hash bucket with its frequency.
+ 
+ The program HashTest has minor user input catches. If the user does not supply a value for all mandatory 
+ inputs the program will not be executed and the user will be informed. Supplying arguments outside of the viable 
+ accepted values with cause an Exception and inhibit the program from running.
+ 
+ The data printed after program execution includes the hashing type. the number of inserted values and the amount of duplicates
+ found when trying to insert a value. The program also supplies the average amount of probes it took to store each hash value.
+ 
+TESTING:
+
+Testing was a major part of this project as its been for every project i've completed at Boise State. After spending
+a few hours coding my hash table class and running through the test I found that most of the test I
+was failing was because of one method. My put method was not correct and there for was causing issues with
+my remove method my frequency method and my getHash method. I realized that my main issues were how I was checking for duplicates
+and calling the hash function if the hash bucket was already full. Other than that I never had any other major testing issues.
+
+
+DISCUSSION:
+ 
+ This was a very challenging yet intriguing project for me. I spent 20 sitting at my desk attacking this beast
+ of a concept. Getting the initial tests to pass were never an issue. I had a slight panic attack because after spending hours coding my
+ HashTest file I couldn't seem to find the test files for it and was most certainly sure that a class as extensive as HashTest
+ has some issues to work out of it. After getting access to the test files I realized some very basic issues with my 
+ hash table class which had to do with the second argument I was calling the getHash method with. I realized that the initial call 
+ outside of finding an unempty bucket and their being no chance it was a duplicate I had to call the method with a 0 initial attempt
+ value. As of now I also can't seem to understand how to get the Average number of probes value anywhere near the value of 
+ the test results. My data when printed is exactly the same. Every value is stored at its correct hash cell and the frequency is
+ correct.
+ 
+ 
+EXTRA CREDIT:
+
+ I attempted to add a quadratic hashing option. The hash table class will accept that value as a type and attempt to hash the value via quadratic hash.
+ From some slight testing its seems to be working as short lists of data are resulting in the quadratic having a slightly worse average probe than 
+ the double hash. Yet when the data list gets bigger the quadratic hash is far and beyond much more efficient.
